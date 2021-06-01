@@ -1,0 +1,459 @@
+﻿
+@{
+    ViewBag.Title = "Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-------------------------->
+<!------------------------.MODAL NUEVO------------------------>
+
+<div class="modal fade" id="modal-primary">
+    <div class="modal-dialog">
+        <div class="modal-content bg-default">
+            <div class="modal-header">
+                <h3 class="card-title" style="font-weight: bold">Nuevo Producto</h3>
+            </div>
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <form class="form-horizontal" id="quickForm">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="nombreP" class="col-lg-4 col-form-label">Nombre</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="nombre" class="form-control" id="nombreP" placeholder="Ingresar Nombre">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tipoP" class="col-lg-4 col-form-label">Tipo de Producto</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("tipoP", (SelectList)ViewBag.TIPOPRODUCTO,
+                                                  "Seleccione", new { @class = "form-control", @name = "tipoP" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="descripcionP" class="col-lg-4 col-form-label">Descripción</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="descripcion" class="form-control" id="descripcionP" placeholder="Ingresar Descripción">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="proveedor" class="col-lg-4 col-form-label">Proveedor</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("proveedor", (SelectList)ViewBag.PROVEEDOR,
+                                                  "Seleccione", new { @class = "form-control", @name = "proveedor" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="precioP" class="col-lg-4 col-form-label">Precio</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="precio" class="form-control" id="precioP" placeholder="Ingresar Precio">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="stockP" class="col-lg-4 col-form-label">Stock</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="stock" class="form-control" id="stockP" placeholder="Ingresar Stock">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="foto" class="col-lg-4 col-form-label">Foto</label>
+                                <div class="col-lg-8">
+                                    <input type="file" name="foto" class="form-control" id="foto">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-primary"><i class="far fa-plus-square"></i> Registrar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i> Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------->
+<!-------------------------->
+<!-------------------------->
+<!------------------------.MODAL ACTUALIZAR------------------------>
+
+<div class="modal fade" id="modal-secondary">
+    <div class="modal-dialog">
+        <div class="modal-content bg-default">
+            <div class="modal-header">
+                <h3 class="card-title" style="font-weight: bold">Actualizar Producto</h3>
+            </div>
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <form class="form-horizontal" id="quickFormUpdt">
+                        <input type="hidden" id="id_actualizar" />
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="nombreP" class="col-lg-4 col-form-label">Nombre</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="nombre" class="form-control" id="nombreP_" placeholder="Ingresar Nombre">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tipoP" class="col-lg-4 col-form-label">Tipo de Producto</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("tipoP_", (SelectList)ViewBag.TIPOPRODUCTO,
+                                                  "Seleccione", new { @class = "form-control", @name = "tipoP" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="descripcionP" class="col-lg-4 col-form-label">Descripción</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="descripcion" class="form-control" id="descripcionP_" placeholder="Ingresar Descripción">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="proveedor" class="col-lg-4 col-form-label">Proveedor</label>
+                                <div class="col-lg-8">
+                                    @Html.DropDownList("proveedor_", (SelectList)ViewBag.PROVEEDOR,
+                                                  "Seleccione", new { @class = "form-control", @name = "proveedor" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="precioP" class="col-lg-4 col-form-label">Precio</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="precio" class="form-control" id="precioP_" placeholder="Ingresar Precio">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="stockP" class="col-lg-4 col-form-label">Stock</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="stock" class="form-control" id="stockP_" placeholder="Ingresar Stock">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="foto" class="col-lg-4 col-form-label">Foto</label>
+                                <div class="col-lg-8">
+                                    <input type="file" name="foto" class="form-control" id="foto_">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="far fa-window-close"></i> Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------->
+<!-------------------------->
+<!------------------------.MODAL ELIMINAR------------------------>
+
+<div class="modal fade" id="modal-sm">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content bg-default">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="far fa-trash-alt"></i></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="ModalEliminar">
+
+                    <input type="hidden" id="id_eliminar" />
+                    <p style="font-weight: bold">Esta seguro de realizar esta acción?</p>
+                    <p>Se eliminara el Producto.</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" id="btnEliminar" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="far fa-window-close"></i> Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------->
+<!-------------------------->
+<!------------------------------TABLA------------------------------->
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modal-primary"><i class="far fa-plus-square"></i> Nuevo Producto</button>
+
+
+        </h3>
+    </div>
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        Stock
+                    </th>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Proveedor
+                    </th>
+                    <th width="50px">
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in ViewBag.PRODUCTO)
+                {
+                    <tr>
+                        <td>
+                            @item.idproducto
+                        </td>
+                        <td>
+                            @item.nombre
+                        </td>
+                        <td>
+                            @item.descripcion
+                        </td>
+                        <td>
+                            @item.precio
+                        </td>
+                        <td>
+                            @item.stock
+                        </td>
+                        <td>
+                            @item.desctipoproducto
+                        </td>
+                        <td>
+                            @item.razonsocial
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-secondary" onclick="EditClick(@item.idproducto)">
+                                    <i class="fas fa-pen-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-sm" onclick="DeleteClick(@item.idproducto)">
+                                    <i class="fas fa-trash "></i>
+                                </button>
+
+                            </div>
+
+
+                        </td>
+                    </tr>
+
+                }
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+
+         $(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+
+                    var url = "@Url.Action("InsertarProducto", "Producto")";
+                    var nombre = $("#nombreP").val();
+                    var idtipoproducto = $("#tipoP").val();
+                    var descripcion = $("#descripcionP").val();
+                    var idproveedor = $("#proveedor").val();
+                    var precio = $("#precioP").val();
+                    var stock = $("#stockP").val();
+                    var foto = $("#foto").val();
+
+                    var data = { nombre: nombre, idtipoproducto: idtipoproducto, descripcion: descripcion, idproveedor: idproveedor, precio: precio, stock: stock, foto: foto };
+
+                    $.post(url, data).done(function (data) {
+                        $("#modal-primary").modal('hide');
+
+                        window.location.href = "/Producto/Index";
+
+                    });
+                }
+            });
+            $('#quickForm').validate({
+                rules: {
+                    nombre: {
+                        required: true,
+                        minlength: 1
+                    },
+                    descripcion: {
+                        required: true,
+                        minlength: 1
+                    },
+                },
+                messages: {
+                    nombre: {
+                        required: "Ingrese el nombre.",
+                        minlength: "Minimo 1 caracter"
+                    },
+                    descripcion: {
+                        required: "Ingrese descripción.",
+                        minlength: "Minimo 1 caracter"
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+         });
+
+
+
+
+        var EditClick = function (id) {
+            $("#id_actualizar").val(id);
+
+
+            var url = "@Url.Action("GetProducto", "Producto")";
+            var id = $("#id_actualizar").val();
+            var data = { id: id };
+            $.post(url, data).done(function (data) {
+                $("#id_actualizar").val(data.idproducto);
+                $("#nombreP_").val(data.nombre);
+                $("#tipoP_").val(data.idtipoproducto);
+		        $("#descripcionP_").val(data.descripcion);
+		        $("#proveedor_").val(data.idproveedor);
+		        $("#precioP_").val(data.precio);
+		        $("#stockP_").val(data.stock);
+		        $("#foto_").val(data.foto);
+
+                $("#modal-secondary").modal('show');
+            });
+        };
+        $(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+
+                    var url = "@Url.Action("ActualizarProducto", "Producto")";
+                    var idproducto = $("#id_actualizar").val();
+                    var nombre =  $("#nombreP_").val();
+                    var idtipoproducto =  $("#tipoP_").val();
+		            var descripcion =  $("#descripcionP_").val();
+		            var idproveedor =  $("#proveedor_").val();
+		            var precio =  $("#precioP_").val();
+		            var stock =  $("#stockP_").val();
+		            var foto =  $("#foto_").val();
+                    var data = { idproducto: idproducto,nombre: nombre, idtipoproducto: idtipoproducto, descripcion: descripcion, idproveedor: idproveedor, precio: precio, stock: stock, foto: foto };
+
+                    $.post(url, data).done(function (data) {
+
+                        $("#modal-secondary").modal('hide');
+                        $("#id_actualizar").val(null);
+                        window.location.href = "/Producto/Index";
+
+                    });
+                }
+            });
+            $('#quickFormUpdt').validate({
+                rules: {
+                    nombre: {
+                        required: true,
+                        minlength: 1
+                    },
+                    descripcion: {
+                        required: true,
+                        minlength: 1
+                    },
+                },
+                messages: {
+                    nombre: {
+                        required: "Ingrese el nombre.",
+                        minlength: "Minimo 1 caracter"
+                    },
+                    descripcion: {
+                        required: "Ingrese descripción.",
+                        minlength: "Minimo 1 caracter"
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+
+
+
+        var DeleteClick = function (id) {
+            $("#id_eliminar").val(id);
+            $("#modal-small").modal('show');
+        };
+
+        $("#btnEliminar").click(function () {
+
+            var url = "@Url.Action("EliminarProducto", "Producto")";
+            var id = $("#id_eliminar").val();
+            var data = { id: id };
+            $.post(url, data).done(function (data) {
+
+                $("#modal-small").modal('hide');
+                $("#id_eliminar").val(null);
+                window.location.href = "/Producto/Index";
+
+
+            });
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+}
+
