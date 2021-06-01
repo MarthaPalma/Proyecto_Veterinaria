@@ -1,0 +1,197 @@
+DROP DATABASE BD_VETERINARIA
+CREATE DATABASE BD_VETERINARIA
+GO
+
+use BD_VETERINARIA
+go
+
+CREATE TABLE TipoDocumento(
+ idtipodoc int identity(1,1) primary key,
+ desctipodoc varchar(50)
+)
+go
+
+CREATE TABLE Rol(
+idrol int identity(1,1) primary key,
+nombre varchar(50)
+)
+go
+
+CREATE TABLE Proveedor(
+idproveedor int identity(1,1) primary key,
+idtipodoc int,
+nrodoc varchar(11),
+razonsocial varchar(100),
+direccion varchar(100),
+telefono varchar(9),
+correo varchar(100),
+foreign key(idtipodoc) references TipoDocumento(idtipodoc)
+)
+go
+
+CREATE TABLE Usuario(
+idusuario int identity(1,1) primary key,
+nombre varchar(100),
+apellido varchar(100),
+direccion varchar(100),
+telefono varchar(9),
+idtipodoc int,
+dni varchar(8),
+correo varchar(100),
+contraseña varchar(500),
+idrol int,
+foreign key(idtipodoc) references TipoDocumento(idtipodoc),
+foreign key(idrol) references Rol(idrol)
+)
+go
+
+CREATE TABLE SexoMascota(
+idsexo int identity(1,1) primary key,
+descsexo varchar(50)
+)
+go
+
+CREATE TABLE TipoMascota(
+idtipomascota int identity(1,1) primary key,
+desctipomascota varchar(100)
+)
+go
+
+CREATE TABLE Mascota(
+idmascota int identity(1,1) primary key,
+idtipomascota int,
+nombre varchar(50),
+raza varchar(50),
+idsexo int,
+edad varchar(15),
+idusuario int,
+idespecie int,
+foreign key (idusuario) references Usuario(idusuario),
+foreign key (idtipomascota) references TipoMascota(idtipomascota),
+foreign key (idsexo) references SexoMascota(idsexo)
+)
+go
+
+CREATE TABLE Pedido(
+idpedido int identity(1,1) primary key,
+fechaRegistro datetime,
+estado varchar(50),
+idusuario int,
+foreign key (idusuario) references Usuario(idusuario)
+)
+go
+
+CREATE TABLE TipoProducto(
+idtipoproducto int identity(1,1) primary key,
+desctipoproducto varchar(100)
+)
+
+go
+
+CREATE TABLE Producto(
+idproducto int identity(1,1) primary key,
+idtipoproducto int,
+nombre varchar(100),
+precio decimal(5,2) ,
+stock int,
+descripcion varchar(250),
+foto varchar(100),
+idproveedor int,
+foreign key (idproveedor) references Proveedor(idproveedor),
+foreign key (idtipoproducto) references TipoProducto(idtipoproducto)
+)
+go
+
+CREATE TABLE Servicio(
+idservicio int identity(1,1) primary key,
+nombre varchar(100),
+precio decimal(5,2),
+descripcion varchar(250),
+foto varchar(100)
+)
+go
+
+CREATE TABLE CitaMedica(
+idcita int identity(1,1) primary key,
+fechaRegistro datetime,
+idservicio int,
+idusuario int,
+idmascota int,
+foreign key(idusuario) references Usuario(idusuario),
+foreign key (idmascota) references Mascota(idmascota),
+foreign key(idservicio) references Servicio(idservicio)
+)
+go
+
+CREATE TABLE Pedido_detalle_producto(
+idpedido int,
+idproducto int,
+cantidad int,
+total decimal(5,2),
+descuento decimal(5,2),
+totalpagar decimal(5,2)
+
+foreign key (idpedido) references Pedido(idpedido),
+foreign key (idproducto) references Producto(idproducto)
+)
+go
+
+CREATE TABLE Pedido_detalle_servicio(
+idpedido int,
+idservicio int,
+importe decimal(5,2),
+descuento decimal(5,2),
+totalpagar decimal(5,2),
+
+foreign key (idpedido) references Pedido(idpedido),
+foreign key (idservicio) references Servicio(idservicio)
+)
+go
+
+CREATE TABLE Pedido_tracking(
+codtracking int identity(100000000,1) primary key,
+fechaCreacion datetime,
+fechaEntrega datetime,
+destino varchar(100),
+estado varchar(50),
+idpedido int,
+idusuario int,
+
+foreign key (idpedido) references Pedido(idpedido),
+foreign key (idusuario) references Usuario(idusuario)
+
+)
+go
+
+insert into TipoDocumento (desctipodoc) values('Dni')
+insert into TipoDocumento (desctipodoc) values('Documento de Extranjeria')
+insert into TipoDocumento (desctipodoc) values('Ruc')
+go
+
+
+insert into TipoProducto (desctipoproducto) values('Juguetes')
+insert into TipoProducto (desctipoproducto) values('Medicina')
+insert into TipoProducto (desctipoproducto) values('Alimentos')
+go
+
+insert into Proveedor (idtipodoc,nrodoc,razonsocial,direccion,telefono,correo) values ('3','20557662406','SUPERPET S.A.C.','Av. Galvez Barrenechea Nro. 819, Lima San Borja','981323444','pedidos@superpet.pe');
+go
+
+insert into Rol (nombre) values ('Administrador')
+insert into Rol (nombre) values ('Personal')
+insert into Rol (nombre) values ('Cliente')
+go
+insert into Usuario(nombre,apellido,direccion,telefono,idtipodoc,dni,correo, contraseña,idrol) values ('Jan Zamer','Nieto Alva','SJL Mariscal Caceres, Lima','936456182','1','72857763','jzamer.2029@hotmail.com','123456','1')
+insert into Usuario(nombre,apellido,direccion,telefono,idtipodoc,dni,correo, contraseña,idrol) values ('Diego','Perez','SJL Huascar, Lima','982166818','1','73584451','guerrerojz.29@gmail.com','654321','3')
+go
+
+insert into TipoMascota values ('Perro')
+insert into TipoMascota values ('Gato')
+go
+
+
+insert into SexoMascota values ('Macho')
+insert into SexoMascota values ('Hembra')
+go
+
+

@@ -87,6 +87,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BD\BD VETERINARIA.txt" />
+    <Content Include="BD\DIAGRAMA_BD.JPG" />
+    <Content Include="BD\SP.txt" />
     <Content Include="BD_VETERINARIA.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BD_VETERINARIA.edmx</DependentUpon>

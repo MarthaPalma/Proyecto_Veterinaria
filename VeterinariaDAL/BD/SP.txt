@@ -1,0 +1,200 @@
+create procedure listar_proveedor
+as
+	select idproveedor,razonsocial from Proveedor
+go
+
+create procedure listar_tipoproducto
+as
+ select idtipoproducto,desctipoproducto from TipoProducto
+go
+
+
+create procedure listar_producto
+as
+select p.idproducto,
+       p.nombre ,
+	   p.descripcion,
+	   p.precio,
+	   p.stock,
+	   p.foto,
+	   p.idtipoproducto,
+	   p.idproveedor, 
+	   tp.desctipoproducto, 
+	   pv.razonsocial
+from producto p inner join TipoProducto tp on(p.idtipoproducto = tp.idtipoproducto ) 
+                inner join Proveedor pv on (p.idproveedor = pv.idproveedor)
+go
+
+create procedure insertar_producto
+@nombre varchar(100),
+@idtipoproducto int,
+@descripcion varchar (250),
+@idproveedor int,
+@precio decimal(5,2),
+@stock int,
+@foto varchar(100)
+as
+  insert into Producto (nombre,idtipoproducto,descripcion,idproveedor,precio,stock,foto)
+  values (@nombre,@idtipoproducto,@descripcion,@idproveedor,@precio,@stock,@foto) 
+go
+
+create procedure actualizar_producto
+@idproducto int,
+@nombre varchar(100),
+@idtipoproducto int,
+@descripcion varchar (250),
+@idproveedor int,
+@precio decimal(5,2),
+@stock int,
+@foto varchar(100)
+
+as
+   update Producto set nombre = @nombre ,
+                       idtipoproducto = @idtipoproducto,
+					   descripcion = @descripcion,
+					   idproveedor = @idproveedor,
+					   precio = @precio,
+					   stock = @stock,
+					   foto = @foto
+				   where idproducto = @idproducto
+go
+
+create procedure eliminar_producto
+@idproducto int
+as
+ delete Producto where idproducto = @idproducto
+go
+
+
+
+
+
+create procedure listar_servicio
+as
+   select idservicio,nombre,descripcion,precio,foto from Servicio
+go
+
+create procedure insertar_servicio
+@nombre varchar(100),
+@descripcion varchar(250),
+@precio decimal(5,2),
+@foto varchar(100)
+as
+ 
+ insert into Servicio (nombre,descripcion,precio,foto) values (@nombre,@descripcion,@precio,@foto)
+ 
+go
+
+create procedure actualizar_servicio
+@idservicio int,
+@nombre varchar(100),
+@descripcion varchar(250),
+@precio decimal(5,2),
+@foto varchar(100)
+as
+  update Servicio set nombre = @nombre,
+                      descripcion = @descripcion,
+					  precio = @precio,
+					  foto = @foto
+                  where idservicio = @idservicio
+go
+
+create procedure eliminar_servicio
+@idservicio int
+as
+ delete Servicio where idservicio = @idservicio
+go
+
+
+create procedure listar_producto_por_id
+@id int
+as
+select idproducto,
+       nombre ,
+	   descripcion,
+	   precio,
+	   stock,
+	   foto,
+	   idtipoproducto,
+	   idproveedor
+from producto where idproducto = @id
+
+go
+
+
+create procedure listar_servicio_por_id
+@id int
+as
+   select idservicio,nombre,descripcion,precio,foto from Servicio where idservicio = @id
+go
+
+create procedure iniciar_sesion
+@correo varchar(100),
+@contraseña varchar(500)
+as
+
+	select idusuario,nombre,apellido,direccion,telefono,dni,correo,contraseña,idrol from Usuario where correo = @correo and contraseña = @contraseña
+
+go
+
+create procedure recuperar_contraseña
+@correo varchar(100),
+@dni varchar(12),
+@contraseña varchar(200)
+as
+
+update Usuario set contraseña = @contraseña where correo = @correo and dni = @dni
+
+go
+
+create procedure registrar_mascota
+@idtipomascota int,
+@nombre varchar(50),
+@raza varchar(50),
+@idsexo int,
+@edad varchar(15),
+@idusuario int
+as
+  insert into Mascota (idtipomascota,nombre,raza,idsexo,edad,idusuario) values (@idtipomascota,@nombre,@raza,@idsexo,@edad,@idusuario)
+go
+
+
+create procedure registrar_usuario_cliente
+@nombre varchar(100),
+@apellido varchar(100),
+@direccion varchar(100),
+@telefono varchar(9),
+@idtipodoc int,
+@dni varchar(12),
+@correo varchar(100),
+@contraseña varchar(500),
+@idusuario int output
+as
+BEGIN
+ insert into Usuario(nombre,apellido,direccion,telefono,idtipodoc,dni,correo,contraseña,idrol) values (@nombre,@apellido,@direccion,@telefono,@idtipodoc,@dni,@correo,@contraseña,3)
+
+ set @idusuario = SCOPE_IDENTITY();
+END
+go
+
+
+
+create procedure listar_tipodocumento
+as
+ select idtipodoc,desctipodoc from TipoDocumento
+go
+
+create procedure listar_rol
+as
+ select idrol,nombre from Rol
+go
+
+create procedure listar_tipomascota
+as
+ select idtipomascota,desctipomascota from TipoMascota
+go
+
+create procedure listar_sexomascota
+as
+  select idsexo,descsexo from SexoMascota
+go
