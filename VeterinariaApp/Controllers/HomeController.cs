@@ -13,5 +13,18 @@ namespace VeterinariaApp.Controllers
         {
             return View();
         }
+
+        // GET: Home
+        public ActionResult IndexCliente()
+        {
+            return View();
+        }
+
+        // GET: Home
+        public ActionResult IndexPersonal()
+        {
+            return View();
+        }
+
     }
 }

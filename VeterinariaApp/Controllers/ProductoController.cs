@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using VeterinariaBL;
 using VeterinariaBE;
+using System.IO;
+using System.Drawing;
 
 namespace VeterinariaApp.Controllers
 {
@@ -33,7 +35,6 @@ namespace VeterinariaApp.Controllers
             bool result = false;
             try
             {
-
                 ProductoBL.InsertarProducto(nombre, idtipoproducto, descripcion, idproveedor, precio, stock, foto);
                 result = true;
                 return Json(result, JsonRequestBehavior.AllowGet);

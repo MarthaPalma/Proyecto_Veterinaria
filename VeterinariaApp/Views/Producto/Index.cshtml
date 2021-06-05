@@ -7,7 +7,6 @@
 
 <!-------------------------->
 <!------------------------.MODAL NUEVO------------------------>
-
 <div class="modal fade" id="modal-primary">
     <div class="modal-dialog">
         <div class="modal-content bg-default">
@@ -16,7 +15,7 @@
             </div>
             <div class="modal-body">
                 <div class="card card-primary">
-                    <form class="form-horizontal" id="quickForm">
+                    <form class="form-horizontal" id="quickForm" enctype="multipart/form-data" method="post">
                         <div class="card-body">
                             <div class="form-group row">
                                 <label for="nombreP" class="col-lg-4 col-form-label">Nombre</label>
@@ -28,7 +27,7 @@
                                 <label for="tipoP" class="col-lg-4 col-form-label">Tipo de Producto</label>
                                 <div class="col-lg-8">
                                     @Html.DropDownList("tipoP", (SelectList)ViewBag.TIPOPRODUCTO,
-                                                  "Seleccione", new { @class = "form-control", @name = "tipoP" })
+"Seleccione", new { @class = "form-control", @name = "tipoP" })
                                 </div>
                             </div>
 
@@ -42,7 +41,7 @@
                                 <label for="proveedor" class="col-lg-4 col-form-label">Proveedor</label>
                                 <div class="col-lg-8">
                                     @Html.DropDownList("proveedor", (SelectList)ViewBag.PROVEEDOR,
-                                                  "Seleccione", new { @class = "form-control", @name = "proveedor" })
+                       "Seleccione", new { @class = "form-control", @name = "proveedor" })
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -290,7 +289,7 @@
                     var precio = $("#precioP").val();
                     var stock = $("#stockP").val();
                     var foto = $("#foto").val();
-
+                    
                     var data = { nombre: nombre, idtipoproducto: idtipoproducto, descripcion: descripcion, idproveedor: idproveedor, precio: precio, stock: stock, foto: foto };
 
                     $.post(url, data).done(function (data) {
@@ -299,6 +298,7 @@
                         window.location.href = "/Producto/Index";
 
                     });
+                    
                 }
             });
             $('#quickForm').validate({

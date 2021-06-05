@@ -43,16 +43,22 @@ namespace VeterinariaApp.Controllers
                     ViewBag.Error = "Usuario o contraseña invalida";
                     return View();
                 }
-                else if (OUser.idrol == 1)
+                else if (OUser.idrol == 1)      // administrador
                 {
                     Session["User"] = OUser;
                     return RedirectToAction("IndexAdmin", "Home");
 
                 }
-                else if (OUser.idrol == 2)
+                else if (OUser.idrol == 2)      // personal
                 {
                     Session["User"] = OUser;
-                    return RedirectToAction("IndexAdmin", "Home");
+                    return RedirectToAction("IndexPersonal", "Home");
+
+                }
+                else if (OUser.idrol == 3)      // cliente
+                {
+                    Session["User"] = OUser;
+                    return RedirectToAction("IndexCliente", "Home");
 
                 }
                 else

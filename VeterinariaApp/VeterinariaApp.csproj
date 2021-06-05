@@ -2082,6 +2082,10 @@
     <Content Include="Views\Acceso\Register.cshtml" />
     <Content Include="Views\Acceso\RecuperarContraseña.cshtml" />
     <Content Include="Views\Tienda\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutCliente.cshtml" />
+    <Content Include="Views\Shared\_LayoutPersonal.cshtml" />
+    <Content Include="Views\Home\IndexCliente.cshtml" />
+    <Content Include="Views\Home\IndexPersonal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
