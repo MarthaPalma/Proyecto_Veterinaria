@@ -15,8 +15,8 @@ namespace VeterinariaApp
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Acceso", action = "Login", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{accion}",
+                defaults: new { controller = "Acceso", action = "Login", id = UrlParameter.Optional, accion = UrlParameter.Optional }
             );
         }
     }

@@ -7,6 +7,8 @@ using VeterinariaBL;
 using VeterinariaBE;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Security;
+using System.Configuration;
 
 namespace VeterinariaApp.Controllers
 {
@@ -46,24 +48,28 @@ namespace VeterinariaApp.Controllers
                 else if (OUser.idrol == 1)      // administrador
                 {
                     Session["User"] = OUser;
+                    FormsAuthentication.SetAuthCookie(correo, true);
                     return RedirectToAction("IndexAdmin", "Home");
 
                 }
                 else if (OUser.idrol == 2)      // personal
                 {
                     Session["User"] = OUser;
+                    FormsAuthentication.SetAuthCookie(correo, true);
                     return RedirectToAction("IndexPersonal", "Home");
 
                 }
                 else if (OUser.idrol == 3)      // cliente
                 {
                     Session["User"] = OUser;
+                    FormsAuthentication.SetAuthCookie(correo, true);
                     return RedirectToAction("IndexCliente", "Home");
 
                 }
                 else
                 {
                     Session["User"] = OUser;
+                    FormsAuthentication.SetAuthCookie(correo, true);
                     return RedirectToAction("Index", "Tienda");
 
                 }
@@ -91,6 +97,17 @@ namespace VeterinariaApp.Controllers
                 return View();
 
             }
-        } 
+        }
+
+        [AllowAnonymous]
+        [OutputCache(NoStore = true, Duration = 0)]
+        public ActionResult CerrarSesion()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Login", "Acceso");
+        }
+
+
     }
 }
