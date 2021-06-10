@@ -7,6 +7,7 @@ using VeterinariaBL;
 using VeterinariaBE;
 using System.IO;
 using System.Drawing;
+using VeterinariaApp.Helpers.Sesion;
 
 namespace VeterinariaApp.Controllers
 {
@@ -15,6 +16,10 @@ namespace VeterinariaApp.Controllers
         // GET: Producto
         public ActionResult Index()
         {
+            if (AdministradorSesion.SesionActiva == false)
+            {
+                return RedirectToAction("Login", "Acceso");
+            }
             var lst = ProductoBL.ListarProducto();
             ViewBag.PRODUCTO = lst;
 

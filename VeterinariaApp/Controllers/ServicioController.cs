@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using VeterinariaBL;
 using VeterinariaBE;
+using VeterinariaApp.Helpers.Sesion;
 
 namespace VeterinariaApp.Controllers
 {
@@ -13,7 +14,10 @@ namespace VeterinariaApp.Controllers
         // GET: Servicio
         public ActionResult Index()
         {
-
+            if (AdministradorSesion.SesionActiva == false)
+            {
+                return RedirectToAction("Login", "Acceso");
+            }
             var lst = ServicioBL.ListarServicio();
             ViewBag.SERVICIO = lst;
 
